@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import boteImg from '/images/bote.png';
 import '../App.css';
 
 const openDB = () => {
@@ -268,7 +269,7 @@ const App = () => {
                 <li key={index}>
                   {name}
                   <button onClick={() => removeName(index + groupIndex * 7)}>
-                    <img src="/images/bote.png" className='bote' alt="Eliminar" />
+                  <img src={boteImg} className='bote' alt="Eliminar" />
                   </button>
                 </li>
               ))}
