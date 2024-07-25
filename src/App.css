@@ -78,18 +78,16 @@ table {
 }
 
 
-/* src/components/NavBar.css */
 
-/* src/components/NavBar.css */
-
-/* src/components/NavBar.css */
 
 .navbar {
-  background-color: #dad8d8; /* Color de fondo de la barra de navegación */
+  background-color: #bdbbbb; /* Color de fondo de la barra de navegación */
   padding: 10px; /* Espaciado interno */
   width: 30%; /* Ancho de la barra de navegación */
   margin-left: 20px; /* Espaciado desde el borde izquierdo de la pantalla */
-  border-radius: 10px;
+  border-radius: 30px;
+  transition: background-color 0.3s; /* Añade una transición suave*/
+  margin-top: -20%;
 }
 
 
@@ -127,7 +125,7 @@ table {
 .textos-nombres{
   color: #333;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400px;
 }
 
 /* styles.css o el nombre de tu archivo CSS */
