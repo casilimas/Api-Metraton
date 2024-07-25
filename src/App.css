@@ -1,0 +1,254 @@
+/* src/components/Tabla.css */
+
+body {
+  background-image: url('/images/luzEditada.png'); /* Ruta a tu imagen */
+  background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área del body */
+  background-position: center; /* Centra la imagen en el body */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 3px solid #ff0101;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #3d6be9;
+  }
+  
+  .in-put{
+  width: 20%;
+  height: 30px;
+  border-radius: 10px;
+  background-color: rgb(231, 231, 212);
+  }
+
+  .agregar-nombre {
+    width: 9%;
+    height: 30px;
+    border-radius: 10px;
+    background-color: rgb(231, 231, 212);
+    border: none; /* Opcional: quita el borde si no lo necesitas */
+    cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón */
+    transition: background-color 0.3s ease; /* Añade una transición suave al cambio de color */
+}
+
+.agregar-nombre:hover {
+  background-color: #ffd700; /* Color dorado */
+  color: #000000; /* Color del texto en hover */
+}
+
+
+.bote{
+  margin-left: 15px;
+}
+
+.agregar-nombre{
+  margin-left: 10px;
+}
+
+.guardar-datos-de-la-tabla {
+  background-color: yellow;
+  border-radius: 10px;
+  transition: background-color 0.3s; /* Añade una transición suave */
+}
+
+.guardar-datos-de-la-tabla:hover {
+  background-color: red;
+  color: white; /* Cambia el color del texto si es necesario */
+}
+
+
+.limpiar-datos-de-la-tabla{
+  background-color: red;
+  border-radius: 10px;
+  transition: background-color 0.3s; /* Añade una transición suave */
+}
+
+.limpiar-datos-de-la-tabla:hover {
+  background-color: yellow;
+  color: black; /* Cambia el color del texto si es necesario */
+}
+
+
+/* src/components/NavBar.css */
+
+/* src/components/NavBar.css */
+
+/* src/components/NavBar.css */
+
+.navbar {
+  background-color: #dad8d8; /* Color de fondo de la barra de navegación */
+  padding: 10px; /* Espaciado interno */
+  width: 30%; /* Ancho de la barra de navegación */
+  margin-left: 20px; /* Espaciado desde el borde izquierdo de la pantalla */
+  border-radius: 10px;
+}
+
+
+.navbar-list {
+  list-style: none; /* Elimina los puntos de la lista */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  display: flex; /* Usa flexbox para alinear los elementos horizontalmente */
+}
+
+.navbar-item {
+  margin-right: 50px; /* Espaciado entre los elementos de la lista */
+}
+
+.navbar-link {
+  color: white; /* Color del texto de los enlaces */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+  font-weight: bold; /* Pone el texto en negrita */
+}
+
+.navbar-link:hover {
+  text-decoration: underline; /* Subraya el enlace al pasar el ratón sobre él */
+}
+
+
+.navbar a {
+  color: #333; /* Color del texto de los enlaces */
+  text-decoration: none; /* Elimina el subrayado de los enlaces */
+}
+
+.navbar a:hover {
+  color: #007bff; /* Color del texto cuando el enlace es hover */
+}
+
+.textos-nombres{
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* styles.css o el nombre de tu archivo CSS */
+.table-container {
+  width: 66.67%; /* 2/3 del ancho de la pantalla */
+  margin-left: 1px; /* Centra la tabla horizontalmente */
+}
+
+
+
+
+
+
+
+/* styles.css o el nombre de tu archivo CSS */
+select {
+  height: 40px; /* Ajusta la altura del combobox */
+  font-size: 16px; /* Tamaño de la fuente dentro del combobox */
+  padding: 0 10px; /* Espaciado interno para el texto */
+  border: 1px solid #ddd; /* Borde alrededor del combobox */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #fff; /* Color de fondo */
+}
+
+/* Opcional: Ajustar el tamaño del dropdown del combobox */
+select::-ms-expand {
+  display: none; /* Oculta el botón de expansión en IE y Edge */
+}
+
+@media (max-width: 768px) {
+  select {
+    height: 35px; /* Ajusta la altura en pantallas más pequeñas si es necesario */
+  }
+}
+
+
+.group-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.group-item {
+  flex: 1 1 calc(100% / 4 - 20px); /* Ajusta el ancho para 4 columnas con espacio */
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.group-item h2 {
+  margin-top: 0;
+}
+
+.textos-nombres {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.textos-nombres li {
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.textos-nombres button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.bote {
+  width: 15px;
+  height: 15px;
+}
+
+
+.acceder {
+  margin-right: 40px;
+  margin-left: 20px;
+  border-radius: 10px;
+  background-color: #87CEFA; /* Azul claro */
+  color: #000000; /* Texto blanco */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.acceder:hover {
+  background-color: #4682B4; /* Azul oscuro */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón */
+}
+
+.acceder:active {
+  background-color: #4169E1; /* Azul Royal para el estado activo */
+  transform: scale(0.95); /* Reduce ligeramente el tamaño del botón al hacer clic */
+}
+
+.acceder:focus {
+  outline: 3px solid #0000FF; /* Resalta el borde del botón en azul cuando tiene foco */
+  outline-offset: 2px;
+}
+
+
+.guardar-fechas{
+  margin-left: 1px;
+  background-color: blue;
+  color: #000000;
+  border-radius: 10px;
+  font-size: 14px; /* Tamaño de fuente */
+  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa sobre el botón */
+  transition: background-color 0.5s ease;
+}
+
+.guardar-fechas:hover {
+  background-color: #FFFF00; /* Amarillo intenso */
+  color: #000000; /* Color del texto en hover */
+  
+}
+
