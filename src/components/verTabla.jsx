@@ -87,16 +87,20 @@ const App = () => {
     }
   }, [authenticated]);
 
+  const handleInputChange = (event) => {
+    const value = event.target.value.toUpperCase().replace(/[^A-Z\s]/g, '');
+    setInputValue(value);
+  };
+
   const addName = async () => {
-    const sanitizedInput = inputValue.trim().toUpperCase().replace(/[^A-Z\s]/g, ''); // Filtrar solo letras y espacios
-    if (sanitizedInput) {
+    if (inputValue.trim()) {
       try {
         const db = await openDB();
         const transaction = db.transaction('names', 'readwrite');
         const objectStore = transaction.objectStore('names');
-        objectStore.add({ name: sanitizedInput });
+        objectStore.add({ name: inputValue.trim() });
         transaction.oncomplete = () => {
-          setEditableNames(prevNames => [...prevNames, sanitizedInput]);
+          setEditableNames(prevNames => [...prevNames, inputValue.trim()]);
           setInputValue('');
         };
         transaction.onerror = () => console.error('Error adding name:', transaction.error);
@@ -246,15 +250,13 @@ const App = () => {
     <div>
       <h1>Crear Tabla de Oficiantes</h1>
 
-      <img src="" alt="" style={{ width: '100px', height: 'auto', display: 'block', margin: '20px auto' }} />
-
       <div>
         <input
           type="text"
           id="name-input"
           name="name"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={handleInputChange}
           placeholder="Ingrese un nombre"  
           className='in-put'
         />
