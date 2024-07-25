@@ -86,9 +86,23 @@ table {
   width: 30%; /* Ancho de la barra de navegación */
   margin-left: 20px; /* Espaciado desde el borde izquierdo de la pantalla */
   border-radius: 30px;
-  transition: background-color 0.3s; /* Añade una transición suave*/
+  transition: background-color 0.3s; /* Añade una transición suave */
   margin-top: -50%;
 }
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .navbar {
+    width: 60%; /* Ancho de la barra de navegación en orientación horizontal */
+    margin-left: 0; /* Elimina el espaciado izquierdo si es necesario */
+    margin-top: 0; /* Ajusta el margen superior según sea necesario */
+    border-radius: 20px; /* Ajusta el radio de borde si es necesario */
+  }
+}
+
+
+
+
+
 
 
 .navbar-list {
