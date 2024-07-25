@@ -88,14 +88,15 @@ const App = () => {
   }, [authenticated]);
 
   const addName = async () => {
-    if (inputValue.trim()) {
+    const sanitizedInput = inputValue.trim().toUpperCase().replace(/[^A-Z\s]/g, ''); // Filtrar solo letras y espacios
+    if (sanitizedInput) {
       try {
         const db = await openDB();
         const transaction = db.transaction('names', 'readwrite');
         const objectStore = transaction.objectStore('names');
-        objectStore.add({ name: inputValue.trim() });
+        objectStore.add({ name: sanitizedInput });
         transaction.oncomplete = () => {
-          setEditableNames(prevNames => [...prevNames, inputValue.trim()]);
+          setEditableNames(prevNames => [...prevNames, sanitizedInput]);
           setInputValue('');
         };
         transaction.onerror = () => console.error('Error adding name:', transaction.error);
@@ -269,7 +270,7 @@ const App = () => {
                 <li key={index}>
                   {name}
                   <button onClick={() => removeName(index + groupIndex * 7)}>
-                  <img src={boteImg} className='bote' alt="Eliminar" />
+                    <img src={boteImg} className='bote' alt="Eliminar" />
                   </button>
                 </li>
               ))}
