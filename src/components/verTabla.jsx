@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import '../App.css'; 
+import '../App.css';
 
 const openDB = () => {
   return new Promise((resolve, reject) => {
@@ -7,11 +7,17 @@ const openDB = () => {
 
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
-      db.createObjectStore('names', { keyPath: 'id', autoIncrement: true }).createIndex('name', 'name', { unique: false });
-      db.createObjectStore('tableData', { keyPath: 'week', unique: false })
-        .createIndex('data', 'data', { unique: false })
-        .createIndex('startDate', 'startDate', { unique: false })
-        .createIndex('endDate', 'endDate', { unique: false });
+      if (!db.objectStoreNames.contains('names')) {
+        const namesStore = db.createObjectStore('names', { keyPath: 'id', autoIncrement: true });
+        namesStore.createIndex('name', 'name', { unique: false });
+      }
+
+      if (!db.objectStoreNames.contains('tableData')) {
+        const tableStore = db.createObjectStore('tableData', { keyPath: 'week' });
+        tableStore.createIndex('data', 'data', { unique: false });
+        tableStore.createIndex('startDate', 'startDate', { unique: false });
+        tableStore.createIndex('endDate', 'endDate', { unique: false });
+      }
     };
 
     request.onsuccess = (event) => resolve(event.target.result);
@@ -26,7 +32,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [selectedMonth, setSelectedMonth] = useState(() => Number(localStorage.getItem('selectedMonth')) || 1);
   const [selectedYear, setSelectedYear] = useState(() => Number(localStorage.getItem('selectedYear')) || new Date().getFullYear());
-  const [weeksData, setWeeksData] = useState(Array(4).fill(null).map(() => Array(5).fill(''))); // Corregido para 5 posiciones
+  const [weeksData, setWeeksData] = useState(Array(4).fill(null).map(() => Array(5).fill('')));
 
   const positions = useMemo(() => ['Semana', 'Guardían', 'Vig1ro', 'Vig2do', 'Ofi. Cer', 'Acolito'], []);
 
@@ -38,6 +44,7 @@ const App = () => {
         const objectStore = transaction.objectStore('names');
         const request = objectStore.getAll();
         request.onsuccess = () => setEditableNames(request.result.map(item => item.name));
+        request.onerror = () => console.error('Error fetching names:', request.error);
       } catch (error) {
         console.error('Error fetching names:', error);
       }
@@ -58,6 +65,7 @@ const App = () => {
               setWeeksData(newWeeksData);
             }
           };
+          request.onerror = () => console.error('Error loading week data:', request.error);
         }
 
         const monthRequest = objectStore.get(0);
@@ -66,6 +74,7 @@ const App = () => {
             console.log('Fechas del mes:', monthRequest.result);
           }
         };
+        monthRequest.onerror = () => console.error('Error loading month dates:', monthRequest.error);
       } catch (error) {
         console.error('Error loading weeks data:', error);
       }
@@ -75,7 +84,7 @@ const App = () => {
       fetchNames();
       loadWeeksData();
     }
-  }, [authenticated, positions]);
+  }, [authenticated]);
 
   const addName = async () => {
     if (inputValue.trim()) {
@@ -88,6 +97,7 @@ const App = () => {
           setEditableNames(prevNames => [...prevNames, inputValue.trim()]);
           setInputValue('');
         };
+        transaction.onerror = () => console.error('Error adding name:', transaction.error);
       } catch (error) {
         console.error('Error adding name:', error);
       }
@@ -102,12 +112,14 @@ const App = () => {
       const allNames = await new Promise(resolve => {
         const request = objectStore.getAll();
         request.onsuccess = () => resolve(request.result);
+        request.onerror = () => console.error('Error fetching all names:', request.error);
       });
       const idToDelete = allNames[index].id;
       objectStore.delete(idToDelete);
       transaction.oncomplete = () => {
         setEditableNames(prevNames => prevNames.filter((_, i) => i !== index));
       };
+      transaction.onerror = () => console.error('Error removing name:', transaction.error);
     } catch (error) {
       console.error('Error removing name:', error);
     }
@@ -134,6 +146,7 @@ const App = () => {
         });
       }
       transaction.oncomplete = () => alert('Datos de las semanas guardados');
+      transaction.onerror = () => console.error('Error saving weeks data:', transaction.error);
     } catch (error) {
       console.error('Error saving weeks data:', error);
     }
@@ -155,6 +168,7 @@ const App = () => {
       });
 
       transaction.oncomplete = () => alert('Fechas del mes guardadas');
+      transaction.onerror = () => console.error('Error saving month dates:', transaction.error);
     } catch (error) {
       console.error('Error saving month dates:', error);
     }
@@ -170,6 +184,7 @@ const App = () => {
         objectStore.delete(weekNumber);
       }
       transaction.oncomplete = () => alert('Datos de las semanas limpiados');
+      transaction.onerror = () => console.error('Error clearing weeks data:', transaction.error);
     } catch (error) {
       console.error('Error clearing weeks data:', error);
     }
@@ -196,7 +211,6 @@ const App = () => {
       alert('Clave incorrecta');
     }
   };
-  
 
   const chunkArray = (array, size) => {
     const result = [];
