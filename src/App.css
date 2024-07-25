@@ -5,7 +5,7 @@ body {
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área del body */
   background-position: center; /* Centra la imagen en el body */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
-  margin-top: 60%;
+  margin-top: 70%;
 }
 
 table {
@@ -87,7 +87,7 @@ table {
   margin-left: 20px; /* Espaciado desde el borde izquierdo de la pantalla */
   border-radius: 30px;
   transition: background-color 0.3s; /* Añade una transición suave*/
-  margin-top: -20%;
+  margin-top: -50%;
 }
 
 
