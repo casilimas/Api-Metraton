@@ -5,6 +5,7 @@ body {
   background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el área del body */
   background-position: center; /* Centra la imagen en el body */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
+  margin-top: 40%;
 }
 
 table {
