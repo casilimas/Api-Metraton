@@ -33,7 +33,7 @@ const App = () => {
   const [password, setPassword] = useState('');
   const [selectedMonth, setSelectedMonth] = useState(() => Number(localStorage.getItem('selectedMonth')) || 1);
   const [selectedYear, setSelectedYear] = useState(() => Number(localStorage.getItem('selectedYear')) || new Date().getFullYear());
-  const [weeksData, setWeeksData] = useState(Array(4).fill(null).map(() => Array(5).fill('')));
+  const [weeksData, setWeeksData] = useState(Array(5).fill(null).map(() => Array(5).fill('')));
 
   const positions = useMemo(() => ['Semana', 'Guardían', 'Vig1ro', 'Vig2do', 'Ofi. Cer', 'Acolito'], []);
 
@@ -56,13 +56,13 @@ const App = () => {
         const db = await openDB();
         const transaction = db.transaction('tableData', 'readonly');
         const objectStore = transaction.objectStore('tableData');
-        const newWeeksData = Array(4).fill(null).map(() => Array(5).fill(''));
+        const newWeeksData = Array(5).fill(null).map(() => Array(5).fill(''));
 
-        for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
+        for (let weekNumber = 1; weekNumber <= 5; weekNumber++) {
           const request = objectStore.get(weekNumber);
           request.onsuccess = () => {
             newWeeksData[weekNumber - 1] = request.result ? request.result.data : Array(5).fill('');
-            if (weekNumber === 4) {
+            if (weekNumber === 5) {
               setWeeksData(newWeeksData);
             }
           };
@@ -142,7 +142,7 @@ const App = () => {
       const db = await openDB();
       const transaction = db.transaction('tableData', 'readwrite');
       const objectStore = transaction.objectStore('tableData');
-      for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
+      for (let weekNumber = 1; weekNumber <= 5; weekNumber++) {
         const weekDates = getWeekDates(selectedYear, selectedMonth, weekNumber);
         objectStore.put({ 
           week: weekNumber, 
@@ -182,11 +182,11 @@ const App = () => {
 
   const clearWeeksData = async () => {
     try {
-      setWeeksData(Array(4).fill(null).map(() => Array(5).fill('')));
+      setWeeksData(Array(5).fill(null).map(() => Array(5).fill('')));
       const db = await openDB();
       const transaction = db.transaction('tableData', 'readwrite');
       const objectStore = transaction.objectStore('tableData');
-      for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
+      for (let weekNumber = 1; weekNumber <= 5; weekNumber++) {
         objectStore.delete(weekNumber);
       }
       transaction.oncomplete = () => alert('Datos de las semanas limpiados');
@@ -288,7 +288,7 @@ const App = () => {
             type="number"
             value={selectedYear}
             onChange={(e) => setSelectedYear(Number(e.target.value))}
-            min="1900"
+            min="2000"
             max="2100"
           />
         </label>
